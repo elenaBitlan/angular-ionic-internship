@@ -2,7 +2,7 @@
     text-overflow: ellipsis;
     overflow: hidden; 
      
-    height: 3.6em !important;
+    
     white-space: nowrap;
   }
 
@@ -19,3 +19,7 @@ form{
   position: relative;
   left: 75vw;
 }
+     
+.text-color{
+  color: #027C61 !important;
+}     

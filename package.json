@@ -1,0 +1,28 @@
+{
+  "name": "tslint.json",
+  "version": "1.0.0",
+  "description": "This is a repository used by FusionWorks interns.  \r Please open [task3/readme](./task3/readme.md) from Task3 folder for further informations.",
+  "main": "index.js",
+  "dependencies": {
+    "tslint": "^5.20.1"
+  },
+  "devDependencies": {
+    "@fusionworks/es-lint": "0.0.1",
+    "eslint": "^6.7.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elenaBitlan/angular-ionic-internship.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elenaBitlan/angular-ionic-internship/issues"
+  },
+  "homepage": "https://github.com/elenaBitlan/angular-ionic-internship#readme"
+}
