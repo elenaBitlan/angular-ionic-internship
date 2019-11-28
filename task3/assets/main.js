@@ -1,10 +1,11 @@
+
+
 fetch('./assets/users.json')
   .then((res) => res.json())
   .then((profile) => {
     const trueProfiles = profile.filter((obj) => obj.isActive);
 
     const buildCards = (arr) => {
-
       const parent = document.getElementById('cards');
       const row = document.createElement('div');
       row.classList.add('row', 'justify-content-center');
@@ -12,7 +13,6 @@ fetch('./assets/users.json')
       parent.appendChild(row);
 
       arr.forEach((obj) => {
-
         const card = document.createElement('div');
         card.classList.add('card', 'text-center', 'bg-white', 'w-20', 'col-md-auto', 'm-4');
         card.setAttribute('id', obj.id);
@@ -52,37 +52,27 @@ fetch('./assets/users.json')
 
     buildCards(trueProfiles);
 
-    checkGender = () => {
-      const gender = document.getElementById('choseGender').value;
+
+    const choseGender = document.getElementById('choseGender');
+    choseGender.addEventListener('change', () => { checker(); }, false);
+    const searchbar = document.getElementById('searchbar');
+    searchbar.addEventListener('keyup', () => { checker(); }, false);
+
+    const checker = () => {
+      const gender = choseGender.value;
+      const input = searchbar.value.toLowerCase();
       const row = document.getElementById('row');
       row.parentNode.removeChild(row);
       let sortedByGender;
-      if (gender != 0) { sortedByGender = trueProfiles.filter((obj) => obj.gender === gender); } else {
-        sortedByGender = trueProfiles;
-      }
-
-      buildCards(sortedByGender);
-      return sortedByGender;
-
-    };
-
-    const sortedByGenderArray = checkGender();
-
-    searchName = () => {
-
-      const input = document.getElementById('searchbar').value.toLowerCase();
-      const row = document.getElementById('row');
-      row.parentNode.removeChild(row);
-
       let sortedByInput;
+      if (gender != 0) {
+        sortedByGender = trueProfiles.filter((obj) => obj.gender === gender);
+      } else { sortedByGender = trueProfiles; }
+
       if (input) {
-
-        sortedByInput = sortedByGenderArray.filter((obj) => obj.fullName.toLowerCase().includes(input));
-      }
-      else {
-
+        sortedByInput = sortedByGender.filter((obj) => obj.fullName.toLowerCase().includes(input));
+      } else {
         sortedByInput = sortedByGender;
-
       }
       buildCards(sortedByInput);
     };

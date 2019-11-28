@@ -4,6 +4,7 @@
   "description": "This is a repository used by FusionWorks interns.  \r Please open [task3/readme](./task3/readme.md) from Task3 folder for further informations.",
   "main": "index.js",
   "dependencies": {
+    "@fusionworks/eslint-config": "0.0.2",
     "tslint": "^5.20.1"
   },
   "devDependencies": {

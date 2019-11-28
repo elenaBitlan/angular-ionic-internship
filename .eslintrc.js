@@ -4,7 +4,7 @@ module.exports = {
     es6: true,
   },
   extends: [
-    'airbnb-base',
+    '@fusionworks/eslint-config',
   ],
   globals: {
     Atomics: 'readonly',
@@ -14,7 +14,5 @@ module.exports = {
     ecmaVersion: 2018,
   },
   rules: {
-    "eqeqeq":0,
-    
   },
 };
