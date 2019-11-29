@@ -1,21 +1,31 @@
 
+interface Person {
+  _id: string,
+  isActive: boolean,
+  gender: string,
+  about: string,
+  picture: string,
+  email: string,
+  fullName: string
+}
 
 fetch('./assets/users.json')
   .then((res) => res.json())
   .then((profile) => {
-    const trueProfiles = profile.filter((obj) => obj.isActive);
+    const trueProfiles: Person[] = profile.filter((obj: Person) => obj.isActive);
 
-    const buildCards = (arr) => {
-      const parent = document.getElementById('cards');
-      const row = document.createElement('div');
+    const buildCards = (arr: Person[]) => {
+
+      const parent = document.getElementById('cards') as HTMLElement;
+      const row: HTMLElement = document.createElement('div');
       row.classList.add('row', 'justify-content-center');
       row.setAttribute('id', 'row');
       parent.appendChild(row);
 
-      arr.forEach((obj) => {
+      arr.forEach((obj: Person) => {
         const card = document.createElement('div');
         card.classList.add('card', 'text-center', 'bg-white', 'w-20', 'col-md-auto', 'm-4');
-        card.setAttribute('id', obj.id);
+        card.setAttribute('id', obj._id);
         card.classList.add(obj.gender);
         row.appendChild(card);
 
@@ -39,8 +49,6 @@ fetch('./assets/users.json')
         const button = document.createElement('button');
         button.classList.add('btn', 'btn-primary');
         button.setAttribute('href', obj.email);
-        button.onclick = (href) => { window.open(href); };
-        button.onclick = window.open;
         button.innerHTML = 'Email';
 
         cardbody.appendChild(image);
@@ -52,28 +60,46 @@ fetch('./assets/users.json')
 
     buildCards(trueProfiles);
 
-
     const choseGender = document.getElementById('choseGender');
+    if (choseGender === null) {
+      return;
+    }
     choseGender.addEventListener('change', () => { checker(); }, false);
     const searchbar = document.getElementById('searchbar');
+    if (searchbar === null) {
+      return;
+    }
     searchbar.addEventListener('keyup', () => { checker(); }, false);
 
     const checker = () => {
-      const gender = choseGender.value;
-      const input = searchbar.value.toLowerCase();
-      const row = document.getElementById('row');
-      row.parentNode.removeChild(row);
-      let sortedByGender;
-      let sortedByInput;
-      if (gender != 0) {
-        sortedByGender = trueProfiles.filter((obj) => obj.gender === gender);
-      } else { sortedByGender = trueProfiles; }
-
-      if (input) {
-        sortedByInput = sortedByGender.filter((obj) => obj.fullName.toLowerCase().includes(input));
-      } else {
-        sortedByInput = sortedByGender;
+      const genderCheck = <HTMLInputElement>document.getElementById('choseGender');
+      if (genderCheck === null) {
+        return;
       }
-      buildCards(sortedByInput);
+      const searchbar = <HTMLInputElement>document.getElementById('searchbar');
+      if (searchbar === null) {
+        return;
+      }
+
+      const input = searchbar.value.toLowerCase();
+      const gender = genderCheck.value;
+
+      const row: HTMLElement | null = document.getElementById('row');
+      if (row !== null && row.parentNode) {
+        row.parentNode.removeChild(row);
+        let sortedByGender: Person[];
+        let sortedByInput: Person[];
+        if (gender != '0') {
+          sortedByGender = trueProfiles.filter((obj: Person) => obj.gender === gender);
+        } else { sortedByGender = trueProfiles; }
+
+        if (input) {
+          sortedByInput = sortedByGender.filter((obj: Person) => obj.fullName.toLowerCase().includes(input));
+        } else {
+          sortedByInput = sortedByGender;
+        }
+        buildCards(sortedByInput);
+      }
+
     };
   });

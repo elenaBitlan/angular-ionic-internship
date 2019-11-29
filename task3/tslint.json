@@ -1,0 +1,9 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "@fusionworks/ts-lint"
+    ],
+    "jsRules": {},
+    "rules": {},
+    "rulesDirectory": []
+}
